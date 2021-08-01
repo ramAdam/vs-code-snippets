@@ -1,0 +1,48 @@
+{
+	// Place your snippets for json here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+
+	"Schematics component schema": {
+		"prefix": "schema-comp",
+		"body": [
+			"{",
+			"  \"$schema\": \"http://json-schema.org/schema\",",
+			"  \"id\": \"${1:SchematicsMyComponent}\",",
+			"  \"title\": \"${2:My Component Schema}\",",
+			"  \"type\": \"object\",",
+			"  \"properties\": {",
+			"    \"${3:name}\": {",
+			"      \"type\": \"${4:string}\",",
+			"      \"description\": \"Your Name\",",
+			"      \"x-prompt\": \"What is your name?\"",
+			"    }",
+			"  },",
+			"  \"required\": [\"${5:name}\"]",
+			"}"
+		],
+		"description": "Schematics component schema"
+	}, 
+
+	"Collection Schema config": {
+		"prefix": "schema-coll-component",
+		"body": [
+			"\"${1:my-component}\": {",
+			"      \"description\": \"${2:A blank Schematic}\",",
+			"      \"factory\": \"${3:./my-component/index#myComponent}\",",
+			"      \"schema\": \"${4:./my-component/schema.json}\"",
+			"}"
+		],
+		"description": "Collection Schema config"
+	}
+}

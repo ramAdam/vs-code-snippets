@@ -1,0 +1,136 @@
+{
+	// Place your snippets for python here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"logger basic": {
+		"prefix": "basic config",
+		"body": [
+			"logging.basicConfig(stream=sys.stdout, level=${1:logging.INFO})"
+		],
+		"description": "logger basic"
+	},
+	
+	"logs error to a file": {
+		"prefix": "error logger",
+		"body": [
+			"    formatter = logging.Formatter(",
+			"        \"%(asctime)s - %(name)s - %(levelname)s - %(message)s\"",
+			"    )",
+			"    file_handler = logging.FileHandler(filename=\"error.log\")",
+			"    file_handler.setFormatter(formatter)",
+			"    file_handler.setLevel(logging.ERROR)",
+			"",
+			"    stdout_handler = logging.StreamHandler(sys.stdout)",
+			"    stdout_handler.setFormatter(formatter)",
+			"",
+			"    logging.basicConfig(",
+			"        level=logging.INFO,",
+			"        handlers=[stdout_handler, file_handler],",
+			"    )"
+		],
+		"description": "logs error to a file"
+	},
+	
+	"Split a string on multiple delimiters with delim excluded": {
+		"prefix": "split a string, delim excluded",
+		"body": [
+			"re.split(r'${1:[+-*/]}', ${2:\"a + b - c / d * e\"})"
+		],
+		"description": "Split a string on multiple delimiters with delim excluded"
+	},
+
+	"Split a string on multiple delimiters with delims included": {
+		"prefix": "split delim included",
+		"body": [
+			"re.split(r'${1:(*+-;/)}', \"${2:lame; a + b - jam*}\")"
+		],
+		"description": "Split on delim with delims included"
+	},
+
+	"filter sequence using list": {
+		"prefix": "filter sequence using list",
+		"body": [
+			"${1:mylist} = [${2:1, 4, -5, 10, -7, 2, 3, -1}]",
+			"${3:example} = [n for n in ${4:mylist} if n > 0]"
+		],
+		"description": "filter sequence using list"
+	},
+	 
+	"filter sequence using generator": {
+		"prefix": "filter sequence using generator",
+		"body": [
+			"${1:example} = (n for n in ${2:mylist} ${3:if n > 0})"
+		],
+		"description": "filter sequence using generator"
+	},
+
+	"Write data in a file with json format": {
+		"prefix": "file writer json",
+		"body": [
+			"with open(${1:\"data.json\"}, \"w\") as f:",
+			"        json.dump(${2:data}, f)"
+		],
+		"description": "Write a data in a file with json format"
+	},
+
+	"Read data from json file": {
+		"prefix": "file reader json",
+		"body": [
+			"with open(${1:'data.json'}, 'r') as f:",
+			"  data = json.load(f)"
+		],
+		"description": "Read data from json file"
+	},
+
+	"read a csv as a dictionary with importlib resource": {
+		"prefix": "file read as a dictionary",
+		"body": [
+			"try:",
+			"  with importlib.resources.path(${1:__package__}, ${2:file_name}) as path:",
+			"  with open(path, \"r\") as f:",
+			"  cdict = csv.DictReader(f)",
+			"except FileNotFoundError:",
+			"        raise RuntimeError(\"Can't read {${3:file_name}} in {${4:__package__}} directory\")"
+		],
+		"description": "read a csv as a dictionary with importlib resource"
+	},
+
+	"Iterates remembers the last element iterated": {
+		"prefix": "Iterator for current and last elment",
+		"body": [
+			"class ${1:NexlIterator}:",
+			"    \"\"\"",
+			"    Iterator maintains the state of",
+			"    current and last element traversed",
+			"    \"\"\"",
+			"",
+			"    def __init__(self, nodes):",
+			"        self.nodes = iter(nodes)",
+			"        self.last = None",
+			"        self.next = next(self.nodes)",
+			"",
+			"    def __iter__(self):",
+			"        return self",
+			"",
+			"    def __next__(self):",
+			"        self._step()",
+			"        return self.next, self.last",
+			"",
+			"    def _step(self):",
+			"        self.last, self.next = self.next, next(self.nodes)"
+		],
+		"description": "Iterates remembers the last element iterated"
+	}
+
+
+}
